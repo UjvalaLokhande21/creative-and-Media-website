@@ -27,6 +27,7 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-12 text-[10px] font-black uppercase tracking-[0.2em]">
         <NavLink to="/" className={({ isActive }) => cn("hover:text-orange-500 transition-colors", isActive && "text-orange-500")}>Home</NavLink>
         <NavLink to="/about" className={({ isActive }) => cn("hover:text-orange-500 transition-colors", isActive && "text-orange-500")}>About</NavLink>
+        <NavLink to="/admin" className={({ isActive }) => cn("hover:text-orange-500 transition-colors", isActive && "text-orange-500")}>Admin</NavLink>
         
         <div 
           className="relative group cursor-pointer"
@@ -89,6 +90,7 @@ const Navbar = () => {
             <div className="flex flex-col gap-8 text-4xl font-black uppercase tracking-tighter">
               <NavLink to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</NavLink>
               <NavLink to="/about" onClick={() => setIsMobileMenuOpen(false)}>About</NavLink>
+              <NavLink to="/admin" onClick={() => setIsMobileMenuOpen(false)}>Admin</NavLink>
               <NavLink to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</NavLink>
               <div className="h-px bg-white/10 my-4" />
               <div className="text-xs uppercase tracking-widest opacity-40 mb-4">Our Designs</div>

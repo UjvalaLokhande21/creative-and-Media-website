@@ -14,6 +14,8 @@ import MediaAgency from './components/designs/MediaAgency';
 import PersonalDesigner from './components/designs/PersonalDesigner';
 import ArtStudio from './components/designs/ArtStudio';
 import CreativeMediaStudio from './components/CreativeMediaStudio';
+import AdminNavbar from './components/admin/AdminNavbar';
+import AdminDashboard from './components/admin/AdminDashboard';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -58,6 +60,21 @@ export default function App() {
               <Route path="/designer" element={<PageWrapper><PersonalDesigner /></PageWrapper>} />
               <Route path="/studio" element={<PageWrapper><ArtStudio /></PageWrapper>} />
               <Route path="/creative-media" element={<PageWrapper><CreativeMediaStudio /></PageWrapper>} />
+              
+              {/* Admin Routes */}
+              <Route path="/admin/*" element={
+                <div className="flex">
+                  <AdminNavbar />
+                  <div className="flex-1">
+                    <Routes>
+                      <Route path="/" element={<AdminDashboard />} />
+                      <Route path="/images" element={<AdminDashboard />} />
+                      <Route path="/products" element={<AdminDashboard />} />
+                      <Route path="/settings" element={<div className="pl-64 p-8 text-white/40">Settings coming soon...</div>} />
+                    </Routes>
+                  </div>
+                </div>
+              } />
             </Routes>
           </AnimatePresence>
         </main>
@@ -71,16 +88,18 @@ export default function App() {
 const ConditionalNavbar = () => {
   const location = useLocation();
   const isLandingPage = location.pathname === '/' || location.pathname === '/creative-media';
+  const isAdminPage = location.pathname.startsWith('/admin');
   
-  if (isLandingPage) return null;
+  if (isLandingPage || isAdminPage) return null;
   return <Navbar />;
 };
 
 const ConditionalFooter = () => {
   const location = useLocation();
   const isLandingPage = location.pathname === '/' || location.pathname === '/creative-media';
+  const isAdminPage = location.pathname.startsWith('/admin');
   
-  if (isLandingPage) return null;
+  if (isLandingPage || isAdminPage) return null;
   
   return (
     <footer className="py-24 px-6 md:px-24 bg-black text-white border-t border-white/10">

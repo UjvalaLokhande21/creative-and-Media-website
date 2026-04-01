@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { NavLink } from 'react-router-dom';
 import { 
   Camera, 
   Palette, 
@@ -97,6 +98,7 @@ const Navbar = () => {
     { name: 'Media', href: '#media' },
     { name: 'Portfolio', href: '#portfolio' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Admin', href: '/admin' },
   ];
 
   return (
@@ -115,14 +117,25 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
-            </a>
+            link.href.startsWith('/') ? (
+              <NavLink 
+                key={link.name} 
+                to={link.href}
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
+              </NavLink>
+            ) : (
+              <a 
+                key={link.name} 
+                href={link.href}
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full" />
+              </a>
+            )
           ))}
           <button className="bg-white text-black px-6 py-2 rounded-full text-sm font-bold hover:bg-purple-500 hover:text-white transition-all duration-300">
             Start Project
@@ -145,14 +158,25 @@ const Navbar = () => {
             className="absolute top-full left-0 w-full bg-black border-b border-white/10 p-6 flex flex-col gap-4 md:hidden"
           >
             {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href} 
-                className="text-lg font-bold text-white/80"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.name}
-              </a>
+              link.href.startsWith('/') ? (
+                <NavLink 
+                  key={link.name} 
+                  to={link.href} 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-white/80"
+                >
+                  {link.name}
+                </NavLink>
+              ) : (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-bold text-white/80"
+                >
+                  {link.name}
+                </a>
+              )
             ))}
             <button className="bg-purple-500 text-white px-6 py-3 rounded-xl font-bold w-full">
               Start Project
